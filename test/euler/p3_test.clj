@@ -18,11 +18,11 @@
     (is (= [2 3 5 7] (primes 10))))
   )
 
-(deftest prime-factors-test
-  (testing "able to get prime factors for 10"
-    (is (= [2 5] (prime-factors 10))))
-  (testing "able to get prime factors for 24"
-    (is (= [2 3] (prime-factors 24))))
-  (testing "able to get prime factors for 13195"
-    (is (= [5 7 13 29] (prime-factors 13195))))
+(deftest max-prime-factor-test
+  (testing "able to get max prime factor for 10"
+    (is (= 5 (max-prime-factor 10 2))))
+  (testing "able to get max prime factor for 24"
+    (is (= 3 (max-prime-factor 24 2))))
+  (testing "able to get max prime factor for 13195"
+    (is (= 29 (max-prime-factor 13195 2))))
   )
