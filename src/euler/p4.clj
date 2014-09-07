@@ -1,6 +1,8 @@
 (ns euler.p4
   (:gen-class))
 
+(comment "this is for problem #6")
+
 (use 'clojure.math.numeric-tower)
 
 (defn sum-square-power

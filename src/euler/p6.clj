@@ -1,6 +1,8 @@
 (ns euler.p6
   (:gen-class))
 
+(comment "this is for problem #4")
+
 (defn factors
   [x, v]
   (filter #(= 0 (rem x %)) v)
