@@ -9,7 +9,7 @@
 
 (defn smallest-multiple
   [n]
-  (reduce * (map #(power-under % n) (primes n))))
+  (reduce * (map #(power-under % n) (primes-under n))))
 
 (defn -main
   [& args]

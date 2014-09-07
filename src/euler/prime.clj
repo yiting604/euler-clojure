@@ -1,7 +1,7 @@
 (ns euler.prime
   (:gen-class))
 
-(defn prime? "Returns false if x is dividable by any of v, although not used"
+(defn prime? "Returns false if x is dividable by any of v"
   [x v]
   (if (empty? v)
     true
@@ -13,7 +13,7 @@
     )
   )
 
-(defn primes "Returns prime numbers less than x, although not used"
+(defn primes-under "Returns prime numbers less than x"
   [x]
   (reduce #(if (prime? %2 %1) (conj %1 %2) %1) [] (range 2 x))
   )

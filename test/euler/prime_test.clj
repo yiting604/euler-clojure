@@ -11,10 +11,10 @@
     (is (true? (prime? 6 []))))
   )
 
-(deftest primes-test
+(deftest primes-under-test
   (testing "able to get primes under 5"
-    (is (= [2 3] (primes 5))))
+    (is (= [2 3] (primes-under 5))))
   (testing "able to get primes under 10"
-    (is (= [2 3 5 7] (primes 10))))
+    (is (= [2 3 5 7] (primes-under 10))))
   )
 
