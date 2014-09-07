@@ -18,3 +18,11 @@
     (is (= [2 3 5 7] (primes-under 10))))
   )
 
+(deftest nth-prime-test
+  (testing "1st prime is 2"
+    (is (= 2 (nth-prime 1))))
+  (testing "2nd prime is 3"
+    (is (= 3 (nth-prime 2))))
+  (testing "5th prime is 11"
+    (is (= 11 (nth-prime 5))))
+  )
