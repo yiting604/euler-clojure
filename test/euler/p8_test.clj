@@ -11,7 +11,7 @@
 
 (deftest n-max-test
   (testing "max product of 3 numbers in a row in [1 2 3 4 5 6] is 120."
-    (is (= 120 (n-max 3 [1 2 3 4 5 6] 0))))
+    (is (= 120 (n-max 3 [1 2 3 4 5 6]))))
   (testing "max product of 3 numbers in a row in [6 5 4 3 2 1] is 120"
-    (is (= 120 (n-max 3 [6 5 4 3 2 1] 0))))
+    (is (= 120 (n-max 3 [6 5 4 3 2 1]))))
   )
