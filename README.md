@@ -1,36 +1,17 @@
 # euler
 
-FIXME: description
+A hobby project to use Clojure to solve Project Euler (projecteuler.net) problems.
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Need Leiningen (leiningen.org) to run.
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar euler-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+$ lein run -m euler.p###
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2014 yiting604@gmail.com
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under Creative Commons Attribution 4.0 International License or any later version.

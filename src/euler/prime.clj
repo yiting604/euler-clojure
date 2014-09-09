@@ -3,12 +3,13 @@
 
 (defn prime? "Returns false if x is dividable by any of v"
   [x v]
-  (if (empty? v)
-    true
-    (if
-      (= 0 (rem x (first v)))
-      false
-      (recur x (rest v))
+  (loop [i 0 n (count v)]
+    (if (< i n)
+      (if (= 0 (rem x (nth v i)))
+        false
+        (recur (inc i) n)
+        )
+      true
       )
     )
   )
@@ -18,23 +19,29 @@
   (if (= x 2) 3 (+ x 2))
   )
 
-(defn find-nth-prime
-  [n x v]
-  (if (= n 0)
-    x
-    (if (prime? x v)
-      (recur (dec n) x (cons x v))
-      (recur n (next-candidate x) v)
+(defn nth-prime
+  [n]
+  (loop [x 2 v (transient [])]
+    (if (< (count v) n)
+      (if (prime? x v)
+        (recur (next-candidate x) (conj! v x))
+        (recur (next-candidate x) v)
+        )
+      (last (persistent! v))
       )
     )
   )
 
-(defn nth-prime
-  [n]
-  (find-nth-prime n 2 [])
-  )
-
 (defn primes-under "Returns prime numbers less than x"
-  [x]
-  (reduce #(if (prime? %2 %1) (conj %1 %2) %1) [] (range 2 x))
+  [n]
+;  (reduce #(if (prime? %2 %1) (conj %1 %2) %1) [] (take-while #(> x %) (iterate next-candidate 2)))
+  (loop [x 2 v (transient [])]
+    (if (< x n)
+      (if (prime? x v)
+        (recur (next-candidate x) (conj! v x))
+        (recur (next-candidate x) v)
+        )
+      (persistent! v)
+      )
+    )
   )
