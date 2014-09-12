@@ -6,6 +6,7 @@
   :dependencies [
                   [org.clojure/clojure "1.6.0"]
                   [org.clojure/math.numeric-tower "0.0.4"]
+                  [org.clojure/data.csv "0.1.2"]
                  ]
   :main euler.core
   :profiles {:uberjar {:aot :all}})
