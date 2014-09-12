@@ -1,6 +1,6 @@
-(ns euler.p8-test
+(ns euler.seq-test
   (:require [clojure.test :refer :all]
-            [euler.p8 :refer :all]))
+            [euler.seq :refer :all]))
 
 (deftest n-product-test
   (testing "product of first 5 numbers in [1 2 3 4 5 6] is 120."
@@ -14,4 +14,9 @@
     (is (= 120 (n-max 3 [1 2 3 4 5 6]))))
   (testing "max product of 3 numbers in a row in [6 5 4 3 2 1] is 120"
     (is (= 120 (n-max 3 [6 5 4 3 2 1]))))
+  )
+
+(deftest digit-seq-test
+  (testing "can convert '123' to (1 2 3)"
+    (is (= [1 2 3] (digit-seq "123"))))
   )
