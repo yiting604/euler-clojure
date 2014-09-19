@@ -1,5 +1,6 @@
 (ns euler.prime
-  (:gen-class))
+  (:gen-class)
+  (:require [clojure.math.numeric-tower :as math]))
 
 (defn prime? "Returns false if x is dividable by any of v"
   [x v]
@@ -34,7 +35,6 @@
 
 (defn primes-under "Returns prime numbers less than x"
   [n]
-;  (reduce #(if (prime? %2 %1) (conj %1 %2) %1) [] (take-while #(> x %) (iterate next-candidate 2)))
   (loop [x 2 v (transient [])]
     (if (< x n)
       (if (prime? x v)
@@ -42,6 +42,21 @@
         (recur (next-candidate x) v)
         )
       (persistent! v)
+      )
+    )
+  )
+
+(defn factors
+  [n]
+  (loop [x n v [] primes (primes-under (-> n math/sqrt math/ceil))]
+    (if (= 1 x)
+      v
+      (let [p (first primes)]
+        (if (= 0 (rem x p))
+          (recur (/ x p) (conj v p) primes)
+          (recur x v (rest primes))
+          )
+        )
       )
     )
   )

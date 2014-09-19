@@ -26,3 +26,10 @@
   (testing "5th prime is 11"
     (is (= 11 (nth-prime 5))))
   )
+
+(deftest factors-test
+  (testing "able to get factors for 8"
+    (is (= [2 2 2] (factors 8))))
+  (testing "able to get factors for 120"
+    (is (= [2 2 2 3 5] (factors 120))))
+  )
