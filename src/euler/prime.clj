@@ -36,7 +36,7 @@
 (defn primes-under "Returns prime numbers less than x"
   [n]
   (loop [x 2 v (transient [])]
-    (if (< x n)
+    (if (<= x n)
       (if (prime? x v)
         (recur (next-candidate x) (conj! v x))
         (recur (next-candidate x) v)
@@ -48,7 +48,7 @@
 
 (defn factors
   [n]
-  (loop [x n v [] primes (primes-under (-> n math/sqrt math/ceil))]
+  (loop [x n v [] primes (primes-under n)]
     (if (= 1 x)
       v
       (let [p (first primes)]

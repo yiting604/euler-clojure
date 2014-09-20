@@ -13,7 +13,7 @@
 
 (deftest primes-under-test
   (testing "able to get primes under 5"
-    (is (= [2 3] (primes-under 5))))
+    (is (= [2 3 5] (primes-under 5))))
   (testing "able to get primes under 10"
     (is (= [2 3 5 7] (primes-under 10))))
   )
@@ -30,6 +30,10 @@
 (deftest factors-test
   (testing "able to get factors for 8"
     (is (= [2 2 2] (factors 8))))
+  (testing "able to get factors for 7"
+    (is (= [7] (factors 7))))
+  (testing "able to get factors for 3"
+    (is (= [3] (factors 3))))
   (testing "able to get factors for 120"
     (is (= [2 2 2 3 5] (factors 120))))
   )
