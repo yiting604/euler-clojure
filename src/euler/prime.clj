@@ -34,27 +34,31 @@
   )
 
 (defn primes-under "Returns prime numbers less than x"
-  [n]
-  (loop [x 2 v (transient [])]
-    (if (<= x n)
-      (if (prime? x v)
-        (recur (next-candidate x) (conj! v x))
-        (recur (next-candidate x) v)
+  ([n] (primes-under n []))
+  ([n primes]
+    (loop [x (if (empty? primes) 2 (last primes)) v primes]
+      (if (<= x n)
+        (if (prime? x v)
+          (recur (next-candidate x) (conj v x))
+          (recur (next-candidate x) v)
+          )
+        v
         )
-      (persistent! v)
       )
     )
   )
 
 (defn factors
-  [n]
-  (loop [x n v [] primes (primes-under n)]
-    (if (= 1 x)
-      v
-      (let [p (first primes)]
-        (if (= 0 (rem x p))
-          (recur (/ x p) (conj v p) primes)
-          (recur x v (rest primes))
+  ([n] (factors n (primes-under n)))
+  ([n primes]
+    (loop [x n v [] ps primes ]
+      (if (empty? ps)
+        v
+        (let [p (first ps)]
+          (if (= 0 (rem x p))
+            (recur (/ x p) (conj v p) ps)
+            (recur x v (rest ps))
+            )
           )
         )
       )

@@ -3,15 +3,15 @@
             [euler.p12 :refer :all]))
 
 (deftest unique-factor-counts-test
-  (testing "able to count unique factors for 7 8."
-    (is (= [1 2] (unique-factor-counts 7 8))))
+  (testing "able to count unique factors for 24 [2 2 2 3]."
+    (is (= [3 1] (unique-factor-counts 24))))
   )
 
 (deftest divisor-count-test
-  (testing "divisor count for 28 (7 * 8 / 2) is 6."
-    (is (= 6 (divisor-count 7 8))))
-  (testing "divisor count for 15 (5 * 6 / 2) is 4."
-    (is (= 4 (divisor-count 5 6))))
+  (testing "divisor count for 28 is 6."
+    (is (= 6 (divisor-count 28))))
+  (testing "divisor count for 15  is 4."
+    (is (= 4 (divisor-count 15))))
   )
 
 (deftest first-divisible-triangular-test
