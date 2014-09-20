@@ -15,15 +15,15 @@
   )
 
 (defn unique-factor-counts
-  [n]
-  (let [v (factors n)]
+  [n primes]
+  (let [v (factors n primes)]
     (map #(count (filter (partial = %) v)) (distinct v))
     )
   )
 
 (defn divisor-count "divisor count for n"
-  [n]
-  (let [v (unique-factor-counts n)]
+  [n primes]
+  (let [v (unique-factor-counts n primes)]
     (let [c (reduce * (map inc v))]
       (do c)
       )
@@ -32,11 +32,13 @@
 
 (defn first-divisible-triangular
   [n]
-  (loop [x 1 c 1]
-    (let [m (-> x inc half-if-even divisor-count)]
-      (if (<= n (* c m))
-        (/ (* x (inc x)) 2)
-        (recur (inc x) m)
+  (loop [x 1 c 1 primes []]
+    (let [ps (primes-under (inc x) primes)]
+      (let [m (divisor-count (-> x inc half-if-even) ps)]
+        (if (<= n (* c m))
+          (/ (* x (inc x)) 2)
+          (recur (inc x) m ps)
+          )
         )
       )
     )
