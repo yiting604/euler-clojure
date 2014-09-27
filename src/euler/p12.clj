@@ -1,5 +1,4 @@
 (ns euler.p12
-  (:gen-class)
   (:require
     [euler.prime :refer :all]
     [clojure.math.numeric-tower :as math]
@@ -16,7 +15,7 @@
 
 (defn unique-factor-counts
   [n primes]
-  (let [v (factors n primes)]
+  (let [v (find-factors n primes)]
     (map #(count (filter (partial = %) v)) (distinct v))
     )
   )
@@ -33,13 +32,11 @@
 (defn first-divisible-triangular
   [n]
   (loop [x 1 c 1 primes []]
-    (let [ps (primes-under (inc x) primes)]
-      (let [m (divisor-count (-> x inc half-if-even) ps)]
-        (if (<= n (* c m))
-          (/ (* x (inc x)) 2)
-          (recur (inc x) m ps)
-          )
-        )
+    (def ps (find-primes-under (inc x) primes))
+    (def m (divisor-count (-> x inc half-if-even) ps))
+    (if (<= n (* c m))
+      (/ (* x (inc x)) 2)
+      (recur (inc x) m ps)
       )
     )
   )

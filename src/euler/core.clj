@@ -1,5 +1,4 @@
-(ns euler.core
-  (:gen-class))
+(ns euler.core)
 
 (defn -main
   "I don't do a whole lot ... yet."

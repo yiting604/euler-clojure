@@ -1,65 +1,69 @@
-(ns euler.prime
-  (:gen-class)
-  (:require [clojure.math.numeric-tower :as math]))
+(ns euler.prime)
 
-(defn prime? "Returns false if x is dividable by any of v"
-  [x v]
-  (loop [i 0 n (count v)]
-    (if (< i n)
-      (if (= 0 (rem x (nth v i)))
+(defn is-prime? "Returns false if x can be divided by any of primes, which could be transient"
+  [x primes]
+  (def n (count primes))
+  (loop [i 0]
+    (cond
+      (>= i n)
+        true
+      (= 0 (rem x (nth primes i)))
         false
-        (recur (inc i) n)
-        )
-      true
+      :else
+        (recur (inc i))
       )
     )
   )
 
-(defn next-candidate
+(defn get-next-candidate
   [x]
   (if (= x 2) 3 (+ x 2))
   )
 
-(defn nth-prime
+(defn find-nth-prime
   [n]
   (loop [x 2 v (transient [])]
-    (if (< (count v) n)
-      (if (prime? x v)
-        (recur (next-candidate x) (conj! v x))
-        (recur (next-candidate x) v)
-        )
-      (last (persistent! v))
+    (def next-candidate (get-next-candidate x))
+    (cond
+      (>= (count v) n)
+        (last (persistent! v))
+      (is-prime? x v)
+        (recur next-candidate (conj! v x))
+      :else
+        (recur next-candidate v)
       )
     )
   )
 
-(defn primes-under "Returns prime numbers less than x"
-  ([n] (primes-under n []))
+(defn find-primes-under "Returns prime numbers less than n"
+  ([n] (find-primes-under n []))
   ([n primes]
-    (loop [x (if (empty? primes) 2 (last primes)) v primes]
-      (if (<= x n)
-        (if (prime? x v)
-          (recur (next-candidate x) (conj v x))
-          (recur (next-candidate x) v)
-          )
-        v
+    (def starting-number (if (empty? primes) 2 (last primes)))
+    (loop [x starting-number v primes]
+      (def next-candidate (get-next-candidate x))
+      (cond
+        (> x n)
+          v
+        (is-prime? x v)
+          (recur next-candidate (conj v x))
+        :else
+          (recur next-candidate v)
         )
       )
     )
   )
 
-(defn factors
-  ([n] (factors n (primes-under n)))
-  ([n primes]
-    (loop [x n v [] ps primes ]
-      (if (empty? ps)
-        v
-        (let [p (first ps)]
-          (if (= 0 (rem x p))
-            (recur (/ x p) (conj v p) ps)
-            (recur x v (rest ps))
-            )
-          )
+(defn find-factors "find all prime factors for number n"
+  ([n] (find-factors n (find-primes-under n)))
+  ([n pre-primes]
+    (loop [x n factors [] [next-prime & more-primes :as primes] pre-primes]
+      (cond
+        (empty? primes)
+          factors
+        (= 0 (rem x next-prime))
+          (recur (/ x next-prime) (conj factors next-prime) primes)
+        :else
+          (recur x factors (rest primes))
         )
       )
     )

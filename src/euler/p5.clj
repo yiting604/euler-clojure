@@ -1,5 +1,4 @@
 (ns euler.p5
-  (:gen-class)
   (:require [euler.prime :refer :all]))
 
 (defn power-under
@@ -9,7 +8,7 @@
 
 (defn smallest-multiple
   [n]
-  (reduce * (map #(power-under % n) (primes-under n))))
+  (reduce * (map #(power-under % n) (find-primes-under n))))
 
 (defn -main
   [& args]
